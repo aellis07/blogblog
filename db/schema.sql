@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS userk_db;
+CREATE DATABASE userk_db;
