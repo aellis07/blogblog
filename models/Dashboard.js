@@ -16,15 +16,7 @@ Dashboard.init(
       allowNull: false,
     },
     postContent: { type: DataTypes.STRING },
-    user_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "User",
-        key: "id",
-      },
-    },
   },
-
   {
     sequelize,
     freezeTableName: true,
