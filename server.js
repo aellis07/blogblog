@@ -8,7 +8,7 @@ const helpers = require("./utils/auth");
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
-const app = express();
+const router = express();
 const PORT = process.env.PORT || 3001;
 
 const hbs = exphbs.create({ helpers });
@@ -23,19 +23,19 @@ const sess = {
   }),
 };
 
-app.use(session(sess));
+router.use(session(sess));
 
-app.engine("handlebars", hbs.engine);
-app.set("view engine", "handlebars");
+router.engine("handlebars", hbs.engine);
+router.set("view engine", "handlebars");
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+router.use(express.static(path.join(__dirname, "public")));
 
-app.use(routes);
+router.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () =>
+  router.listen(PORT, () =>
     console.log("Now listening from: http://localhost:3001")
   );
 });
