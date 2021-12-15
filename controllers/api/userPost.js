@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const { Dashboard } = require("../../models");
+const authorization = require("../../utils/auth");
 
-router.post("/", async (req, res) => {
+router.post("/", authorization, async (req, res) => {
   try {
     const newProject = await Dashboard.create({
       ...req.body,
@@ -16,7 +17,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authorization, async (req, res) => {
   try {
     const projectData = await Dashboard.destroy({
       where: {
